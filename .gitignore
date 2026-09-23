@@ -7,3 +7,7 @@ package-lock.json
 # build folder
 
 build
+
+# Environment file
+
+.env
