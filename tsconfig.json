@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {
+"compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -24,7 +24,10 @@
     /* Emit & Types */
     "sourceMap": true,
     "types": ["node"]
+
+    
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "build"]
+  
 }
