@@ -52,9 +52,18 @@ updateCar = async (req: Request, res: Response): Promise<void> => {
   }
  };
 
-deleteCar = async (_req: Request, res: Response): Promise<void> => {
-  res.status(200).json({ success: true, 
-  data: `this is just dummy for now a response to the delete car by id request with car id ${_req.params.id}` }); 
+deleteCar = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const car = await carService.getCarById(id);
+    if (!car) {
+      res.status(404).json({ message: 'Car not found' });
+      return;
+  }
+    await carService.deleteCar(id);
+    res.status(200).json({ message: 'Car deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching car', error });
+  }
  };
- 
 }
