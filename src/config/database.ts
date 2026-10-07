@@ -4,6 +4,10 @@ import mongoose from 'mongoose';
 
 const uri = env.mongoURI ;
 
+export const disconnectDB = async (): Promise<void> => {
+  await mongoose.disconnect();
+}
+
 export const connectDB = async (): Promise<void> => {
     try {
         console.log(`Connecting to MongoDB at ${uri}`);
