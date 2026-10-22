@@ -1,17 +1,18 @@
+import z from "zod";
 import { createCarZSchema } from "../../models/cars";
 import { describe, expect, it } from "vitest";
 
-const validCar = {
+const validCar = z.object({
     "make": "Una",
     "model": "0871234567",
     "year": 1980
-}
+});
 
 describe('Test Car Validation', () => {
     it('should pass for the following valid data', () => {
 
         expect(() => createCarZSchema.parse(
-            validCar)).not.toThrow();
+            {body:validCar})).not.toThrow();
     });
 
   it('should pass for the following valid data - no date', () => {

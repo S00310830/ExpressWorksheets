@@ -9,11 +9,21 @@ x-api-key: blahblah
 {
     "make": "Ford",
     "model": "Mustang",
+    "year": 1960
+}
+
+###
+# @name postACar2
+POST {{endpoint}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "make": "Ford",
+    "model": "Mustang",
     "year": 1900
 }
 
 ###
-
 @newcar = {{postACar.response.body._id}}
 
 ###
@@ -26,18 +36,23 @@ GET http://localhost:3000/api/v1/cars HTTP/1.1
 content-type: application/json
 x-api-key: blahblah
 
-
 ###
-GET  {{endpoint}}/sillycarID HTTP/3.0
+PUT  {{endpoint}}/{{newcar}} HTTP/3.0
 content-type: application/json
 
+{
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 2022
+}
 
 ###
 
-DELETE  {{endpoint}}/sillycarID HTTP/3.0
+DELETE  {{endpoint}}/{{newcar}} HTTP/3.0
 content-type: application/json
 
 ###
-
-PUT  {{endpoint}}/sillycarID HTTP/3.0
+@fakeid = 000A000B000C000D000E000F
+###
+GET {{endpoint}}/{{fakeid}} HTTP/3.0
 content-type: application/json
