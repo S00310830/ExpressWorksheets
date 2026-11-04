@@ -13,6 +13,8 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use((_req, _res, next) => setTimeout(next, 2000));
+
 app.get("/ping", (_req : Request, res: Response) => {
     res.status(200).json({ message: "hello from Una" });
 });
