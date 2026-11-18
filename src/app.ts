@@ -5,13 +5,15 @@ import { swaggerSpec } from "./config/swagger";
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
 import { errorHandler } from "./middleware/errorHandler.middleware";
-
+import authRoutes from './routes/auth';
+ 
 
 export const app: Application = express();
 
 app.use(express.json());
-
 app.use(cors());
+
+app.use('/api/v1/auth', authRoutes);
 
 app.get("/ping", (_req : Request, res: Response) => {
     res.status(200).json({ message: "hello from Una" });

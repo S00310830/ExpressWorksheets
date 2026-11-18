@@ -1,0 +1,45 @@
+@authEndpoint = http://localhost:3000/api/v1/auth
+@carsEndpoint = http://localhost:3000/api/v1/cars
+
+POST {{authEndpoint}}/register HTTP/1.1
+content-type: application/json
+{
+    "name": "fdf",
+    "email": "una2@example.com",
+    "password": "pasadfdfdfsdf"
+}
+
+###
+
+# @name login
+POST {{authEndpoint}}/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "una2@example.com",
+    "password": "pasadfdfdfsdf"
+}
+
+### 
+# @name postACar
+POST {{carsEndpoint}} HTTP/1.1
+content-type: application/json
+
+{
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 1960
+}
+
+###
+
+@newcar = {{postACar.response.body._id}}
+@accessToken = {{login.response.body.token}}
+
+DELETE {{carsEndpoint}}/{{newcar}} HTTP/1.1
+Authorization: Bearer {{accessToken}}
+
+###
+
+GET {{authEndpoint}}/me HTTP/1.1
+Authorization: Bearer {{accessToken}}
